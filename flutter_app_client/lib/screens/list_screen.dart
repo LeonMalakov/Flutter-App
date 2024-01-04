@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_client/data/item.dart';
 import 'package:flutter_app_client/data/item_id.dart';
 import 'package:flutter_app_client/screens/item_popup.dart';
 import 'package:flutter_app_client/screens/widgets/list_screen_item.dart';
@@ -13,37 +14,40 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
-  final List<String> items = List<String>.generate(10000, (i) => "Item $i");
+  late final List<Item> _items;
+
+  _ListScreenState() {
+     _items = Globals.services.itemCollection.getAll();
+  }
 
   void _onFavoriteClicked(ItemId id) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Item favorite clicked')),
-    );
+    setState(() {
+      Globals.services.itemOperations.toggleFavorite(id);
+    });
   }
 
   void _onClicked(ItemId id) {
+    final item = Globals.services.itemCollection.get(id);
+
+    if(item == null) {
+      return;
+    }
+
     Globals.services.screen.openPopup(
         context,
         Globals.factories.itemPopup.create(ItemPopupArgs(
-            itemId: id,
-            onFavoriteClicked: _onFavoriteClicked
+            item: item
         ))
     );
-
-    /*ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Item clicked')),
-    );*/
   }
 
   @override
   Widget build(BuildContext context) {
     return  ListView.builder(
-        itemCount: items.length,
+        itemCount: _items.length,
         itemBuilder: (context, index) {
           return ListScreenItem(
-            id: ItemId(index),
-            title: 'Item ${items[index]}',
-            subtitle: 'Tap on the heart icon to favorite',
+            item: _items[index],
             onFavoriteClicked: _onFavoriteClicked,
             onClicked: _onClicked,
           );
