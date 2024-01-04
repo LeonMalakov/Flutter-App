@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_client/constants/app_constants.dart';
-import 'package:flutter_app_client/constants/color_constants.dart';
+import 'package:flutter_app_client/constants/layout_constants.dart';
 import 'package:flutter_app_client/nav_layout.dart';
 import 'package:flutter_app_client/screens/boot_screen.dart';
+import 'package:flutter_app_client/screens/list_screen.dart';
 import 'package:flutter_app_client/screens/login_screen.dart';
 
 import 'app_layout.dart';
@@ -20,7 +21,7 @@ class App extends StatelessWidget {
       title: 'App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: ColorConstants.mainColor,
+          primarySwatch: LayoutConstants.mainColor,
         ),
         useMaterial3: true,
       ),
@@ -28,7 +29,7 @@ class App extends StatelessWidget {
         RouteConstants.boot: (context) => const AppLayout(childWidget: BootScreen()),
         RouteConstants.login: (context) => const AppLayout(childWidget: LoginScreen()),
         RouteConstants.home: (context) => const NavLayout(childWidget: Text("Нахуй мир")),
-        RouteConstants.list: (context) => const NavLayout(childWidget: Text("Лист говна тут")),
+        RouteConstants.list: (context) => const NavLayout(childWidget: ListScreen()),
         RouteConstants.favorites: (context) => const NavLayout(childWidget: Text("Избранное тут")),
       },
       initialRoute: RouteConstants.boot

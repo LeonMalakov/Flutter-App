@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_client/utility/collection_utility.dart';
 
 import 'constants/app_constants.dart';
-import 'constants/color_constants.dart';
+import 'constants/layout_constants.dart';
 import 'app_layout.dart';
 import 'globals.dart';
 
@@ -39,7 +39,7 @@ class NavLayout extends StatelessWidget {
               label: 'Избранное',
             ),
           ],
-          selectedItemColor: ColorConstants.mainColor,
+          selectedItemColor: LayoutConstants.mainColor,
           currentIndex: _screenRouteToIndexMap[Globals.services.screen.getActiveScreen()] ?? 0,
           onTap: (index) {
             String? route = _indexToScreenRouteMap[index];

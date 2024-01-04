@@ -8,7 +8,7 @@ class AuthService {
 
   Future<bool> checkAuth() async {
     await Future.delayed(const Duration(seconds: 2));
-    return false;
+    return true;
   }
 
   Future<bool> tryAuth(String email, String password) async {

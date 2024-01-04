@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'constants/color_constants.dart';
+import 'constants/layout_constants.dart';
 
 class AppLayout extends StatelessWidget {
   final Widget childWidget;
@@ -13,7 +13,7 @@ class AppLayout extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('App'),
-        backgroundColor: ColorConstants.headerColor,
+        backgroundColor: LayoutConstants.headerColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
