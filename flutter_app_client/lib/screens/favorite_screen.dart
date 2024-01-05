@@ -7,19 +7,17 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../globals.dart';
 
-class ListScreen extends StatefulWidget {
-  const ListScreen({super.key});
+class FavoriteScreen extends StatefulWidget {
+  const FavoriteScreen({super.key});
 
   @override
-  State<ListScreen> createState() => _ListScreenState();
+  State<FavoriteScreen> createState() => _FavoriteScreenState();
 }
 
-class _ListScreenState extends State<ListScreen> {
+class _FavoriteScreenState extends State<FavoriteScreen> {
   static const _pageSize = 20;
 
   final PagingController<int, Item> _pagingController = PagingController(firstPageKey: 0);
-
-  //late final List<Item> _items;
 
   @override
   void initState() {
@@ -58,7 +56,7 @@ class _ListScreenState extends State<ListScreen> {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final newItems = await Globals.services.itemOperations.getItemPage(pageKey, _pageSize);
+      final newItems = await Globals.services.itemOperations.getFavoriteItemPage(pageKey, _pageSize);
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);
@@ -84,16 +82,5 @@ class _ListScreenState extends State<ListScreen> {
         ),
       ),
     );
-
-    /*return  ListView.builder(
-        itemCount: _items.length,
-        itemBuilder: (context, index) {
-          return ListScreenItem(
-            item: _items[index],
-            onFavoriteClicked: _onFavoriteClicked,
-            onClicked: _onClicked,
-          );
-        },
-    );*/
   }
 }

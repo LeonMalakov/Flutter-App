@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter_app_client/data/item.dart';
 
 import '../data/item_id.dart';
@@ -5,9 +7,23 @@ import '../data/item_id.dart';
 class ItemCollectionService {
   final Map<ItemId, Item> _map = {};
   final Map<int, ItemId> _itemSequence = {};
+  final HashSet<ItemId> _favoriteItemIds = HashSet();
 
   ItemCollectionService() {
     //test();
+  }
+
+  bool isFavorite(ItemId id) {
+    return _favoriteItemIds.contains(id);
+  }
+
+  List<ItemId> getFavoriteItemIds() {
+    return _favoriteItemIds.toList();
+  }
+
+  void setFavoriteItemIds(List<ItemId> ids) {
+    _favoriteItemIds.clear();
+    _favoriteItemIds.addAll(ids);
   }
 
   ItemId? getSequenceItemId(int index) {
@@ -31,7 +47,11 @@ class ItemCollectionService {
   }
 
   void setIsFavorite(ItemId id, bool isFavorite) {
-    _map[id]?.isFavorite = isFavorite;
+    if(isFavorite) {
+      _favoriteItemIds.add(id);
+    } else {
+      _favoriteItemIds.remove(id);
+    }
   }
 
 /*  void test(){

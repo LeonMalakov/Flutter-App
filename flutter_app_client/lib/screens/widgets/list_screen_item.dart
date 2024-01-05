@@ -6,12 +6,14 @@ import '../../data/item_id.dart';
 
 class ListScreenItem extends StatelessWidget {
   final Item item;
+  final bool isFavorite;
   final Function(ItemId) onFavoriteClicked;
   final Function(ItemId) onClicked;
 
   const ListScreenItem({
     super.key,
     required this.item,
+    required this.isFavorite,
     required this.onFavoriteClicked,
     required this.onClicked,
   });
@@ -20,7 +22,7 @@ class ListScreenItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: FavoriteButton(
-        isFavorite: item.isFavorite,
+        isFavorite: isFavorite,
         onPressed: () {
           onFavoriteClicked(item.id);
         },

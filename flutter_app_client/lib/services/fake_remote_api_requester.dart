@@ -28,8 +28,16 @@ class FakeRemoteApiRequester implements IRemoteApiRequester {
         subtitle: 'Подзаголовок фильма ${id.value}',
         description: 'Описание фильма ${id.value}',
         imageUrl: 'https://thumbs.dfs.ivi.ru/storage6/contents/8/8/84a1f2c0430452ab08f07c86eab477.jpg',
-        isFavorite: id.value % 2 == 0,
       ));
+    }
+  }
+
+  @override
+  Future getFavoriteItemIds(List<ItemId> outIds) async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    for(int i = 5; i < 14; i++){
+      outIds.add(ItemId(i));
     }
   }
 }

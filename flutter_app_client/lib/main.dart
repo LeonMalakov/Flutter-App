@@ -3,6 +3,7 @@ import 'package:flutter_app_client/constants/app_constants.dart';
 import 'package:flutter_app_client/constants/layout_constants.dart';
 import 'package:flutter_app_client/nav_layout.dart';
 import 'package:flutter_app_client/screens/boot_screen.dart';
+import 'package:flutter_app_client/screens/favorite_screen.dart';
 import 'package:flutter_app_client/screens/list_screen.dart';
 import 'package:flutter_app_client/screens/login_screen.dart';
 
@@ -30,7 +31,7 @@ class App extends StatelessWidget {
         RouteConstants.login: (context) => const AppLayout(childWidget: LoginScreen()),
         RouteConstants.home: (context) => const NavLayout(childWidget: Text("Нахуй мир")),
         RouteConstants.list: (context) => const NavLayout(childWidget: ListScreen()),
-        RouteConstants.favorites: (context) => const NavLayout(childWidget: Text("Избранное тут")),
+        RouteConstants.favorites: (context) => const NavLayout(childWidget: FavoriteScreen()),
       },
       initialRoute: RouteConstants.boot
     );

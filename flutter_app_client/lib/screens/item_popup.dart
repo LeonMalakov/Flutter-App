@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_client/data/item_id.dart';
 import 'package:flutter_app_client/globals.dart';
 import 'package:flutter_app_client/screens/widgets/favorite_button.dart';
 
@@ -53,7 +52,7 @@ class _ItemPopupState extends State<ItemPopup> {
                     top: 0,
                     right: 0,
                     child: FavoriteButton(
-                      isFavorite: widget.args.item.isFavorite,
+                      isFavorite: Globals.services.itemCollection.isFavorite(widget.args.item.id),
                       onPressed: _onFavoriteClicked,
                       size: 50,
                     ),

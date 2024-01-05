@@ -5,4 +5,6 @@ abstract interface class IRemoteApiRequester {
   Future getItemIdPage(int startIndex, int count, List<ItemId> outIds);
 
   Future getItems(List<ItemId> ids, List<Item> outItems);
+
+  Future getFavoriteItemIds(List<ItemId> outIds);
 }
