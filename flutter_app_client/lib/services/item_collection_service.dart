@@ -4,9 +4,18 @@ import '../data/item_id.dart';
 
 class ItemCollectionService {
   final Map<ItemId, Item> _map = {};
+  final Map<int, ItemId> _itemSequence = {};
 
   ItemCollectionService() {
-    test();
+    //test();
+  }
+
+  ItemId? getSequenceItemId(int index) {
+    return _itemSequence[index];
+  }
+
+  void addSequenceItemId(int index, ItemId id) {
+    _itemSequence[index] = id;
   }
 
   List<Item> getAll() {
@@ -17,7 +26,7 @@ class ItemCollectionService {
     return _map[id];
   }
 
-  void add(Item item) {
+  void set(Item item) {
     _map[item.id] = item;
   }
 
@@ -25,7 +34,7 @@ class ItemCollectionService {
     _map[id]?.isFavorite = isFavorite;
   }
 
-  void test(){
+/*  void test(){
     add(Item(
         id: const ItemId(1),
         title: 'Гнев Человеческий',
@@ -43,5 +52,5 @@ class ItemCollectionService {
     ));
 
     setIsFavorite(const ItemId(1), true);
-  }
+  }*/
 }

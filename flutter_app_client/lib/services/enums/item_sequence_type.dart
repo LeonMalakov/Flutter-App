@@ -1,0 +1,4 @@
+enum ItemSequenceType {
+  list,
+  favorites,
+}

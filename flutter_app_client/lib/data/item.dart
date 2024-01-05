@@ -6,7 +6,7 @@ class Item {
   final String subtitle;
   final String description;
   final String imageUrl;
-  bool isFavorite = false;
+  bool isFavorite;
 
   Item({
     required this.id,
@@ -14,5 +14,6 @@ class Item {
     required this.subtitle,
     required this.description,
     required this.imageUrl,
+    this.isFavorite = false,
   });
 }
