@@ -1,10 +1,13 @@
 import 'dart:collection';
 
+import 'package:event/event.dart';
 import 'package:flutter_app_client/data/item.dart';
 
 import '../data/item_id.dart';
 
 class ItemCollectionService {
+  final onFavoriteChanged = Event<Value<ItemId>>();
+
   final Map<ItemId, Item> _map = {};
   final Map<int, ItemId> _itemSequence = {};
   final HashSet<ItemId> _favoriteItemIds = HashSet();
@@ -52,6 +55,8 @@ class ItemCollectionService {
     } else {
       _favoriteItemIds.remove(id);
     }
+
+    onFavoriteChanged.broadcast(Value(id));
   }
 
 /*  void test(){
