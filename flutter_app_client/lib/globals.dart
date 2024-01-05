@@ -1,4 +1,5 @@
 import 'package:flutter_app_client/services/auth_service.dart';
+import 'package:flutter_app_client/services/boarding_service.dart';
 import 'package:flutter_app_client/services/fake_remote_api_requester.dart';
 import 'package:flutter_app_client/services/i_remote_api_requester.dart';
 import 'package:flutter_app_client/services/item_collection_service.dart';
@@ -18,6 +19,7 @@ class Services {
   final itemCollection = ItemCollectionService();
   final itemOperations = ItemOperationsService();
   final IRemoteApiRequester remoteApiRequester = FakeRemoteApiRequester();
+  final boarding = BoardingService();
 }
 
 class Factories {

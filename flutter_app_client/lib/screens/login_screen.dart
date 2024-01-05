@@ -45,12 +45,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Center(
+    return Align(
+        alignment: Alignment.center,
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Text("Вход", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Enter your email',
@@ -86,7 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
-      )
-    );
+      );
   }
 }

@@ -29,7 +29,7 @@ class _BootScreenState extends State<BootScreen> {
     if(authSuccess) {
       _moveToScreen(RouteConstants.home);
     } else{
-      _moveToScreen(RouteConstants.login);
+      _moveToScreen(RouteConstants.boarding);
     }
   }
 

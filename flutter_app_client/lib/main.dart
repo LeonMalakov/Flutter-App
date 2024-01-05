@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_client/constants/app_constants.dart';
 import 'package:flutter_app_client/constants/layout_constants.dart';
 import 'package:flutter_app_client/nav_layout.dart';
+import 'package:flutter_app_client/screens/boarding_screen.dart';
 import 'package:flutter_app_client/screens/boot_screen.dart';
 import 'package:flutter_app_client/screens/favorite_screen.dart';
 import 'package:flutter_app_client/screens/list_screen.dart';
@@ -28,6 +29,7 @@ class App extends StatelessWidget {
       ),
       routes: {
         RouteConstants.boot: (context) => const AppLayout(childWidget: BootScreen()),
+        RouteConstants.boarding: (context) => const BoardingScreen(),
         RouteConstants.login: (context) => const AppLayout(childWidget: LoginScreen()),
         RouteConstants.home: (context) => const NavLayout(childWidget: Text("Нахуй мир")),
         RouteConstants.list: (context) => const NavLayout(childWidget: ListScreen()),
