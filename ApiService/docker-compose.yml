@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+
+  casino:
+    container_name: casino-exec
+    build:
+      context: .
+      dockerfile: ./Casino/Dockerfile
+    env_file: 
+      - ./.secrets/casino.env
+    secrets:
+      - cred_secret
+    ports:
+      - "3151:3010"
+    networks:
+      - casino-net
+    volumes:
+      - ./:/usr/src/app
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres-exec
+    image: postgres:15.4
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    env_file: ./.secrets/postgres.env
+    ports:
+      - "5432:5432"
+    networks:
+      - casino-net
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+networks:
+  casino-net:
+    driver: bridge
+
+volumes:
+  postgres-data:
+
+secrets:
+   cred_secret:
+     file: ./.secrets/credentials.json
