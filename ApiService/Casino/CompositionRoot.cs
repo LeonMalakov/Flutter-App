@@ -42,6 +42,7 @@ namespace Casino {
             BindDb();
 
             _services.AddScoped<IAuthService, AuthService>();
+            _services.AddScoped<IAppService, AppService>();
         }
 
         private void BindDb() {
