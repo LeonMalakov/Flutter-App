@@ -1,5 +1,6 @@
 ﻿using Casino.DAL.Models;
 using Casino.DAL.Respositories;
+using Casino.Utility;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,6 +13,10 @@ namespace Casino.Services {
         public AppService(IAppRepository repository, ILoggerFactory loggerFactory) {
             _repository = repository;
             _logger = loggerFactory.CreateLogger<AppService>();
+
+            if (ItemDataLoading.TryLoad(out var dataItem)) {
+                _repository.CreateItems(dataItem);
+            }
         }
 
         public async ValueTask<List<Item>> GetItems(int[] itemIds) {

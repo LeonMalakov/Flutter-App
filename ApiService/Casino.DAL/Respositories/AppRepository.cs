@@ -1,5 +1,6 @@
 ﻿using Casino.DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,22 +11,6 @@ namespace Casino.DAL.Respositories {
 
         public AppRepository(ApplicationDbContext context) {
             _context = context;
-
-            if(!_context.Items.Any()) {
-                _context.Items.Add(new Item() {
-                    Title = "Перевозчик",
-                    Subtitle = "Первая часть трилогии",
-                    Description = "Фильм перевозчик про стетхема",
-                    ImageUrl = "https://thumbs.dfs.ivi.ru/storage6/contents/8/8/84a1f2c0430452ab08f07c86eab477.jpg"
-                });
-                _context.Items.Add(new Item() {
-                    Title = "Гнев Человеческий",
-                    Subtitle = "Крутой фильм",
-                    Description = "Фильм гнев про стетхема",
-                    ImageUrl = "https://thumbs.dfs.ivi.ru/storage6/contents/8/8/84a1f2c0430452ab08f07c86eab477.jpg"
-                });
-                _context.SaveChanges();
-            }
         }
 
         public Task CreateUser(User user) {
@@ -85,6 +70,16 @@ namespace Casino.DAL.Respositories {
             }
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public void CreateItems(List<Item> items) {
+            try {
+                if (!_context.Items.Any()) {
+                    _context.Items.AddRange(items);
+                    _context.SaveChanges();
+                }
+            } catch (Exception ex) {
+            }
         }
     }
 }

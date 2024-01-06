@@ -9,8 +9,6 @@ services:
       dockerfile: ./Casino/Dockerfile
     env_file: 
       - ./.secrets/casino.env
-    secrets:
-      - cred_secret
     ports:
       - "3151:3010"
     networks:
@@ -40,7 +38,3 @@ networks:
 
 volumes:
   postgres-data:
-
-secrets:
-   cred_secret:
-     file: ./.secrets/credentials.json

@@ -18,4 +18,5 @@ RUN dotnet publish "Casino.csproj" -c Release -o /app/publish /p:UseAppHost=fals
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY statham.json statham.json
 ENTRYPOINT ["dotnet", "Casino.dll"]

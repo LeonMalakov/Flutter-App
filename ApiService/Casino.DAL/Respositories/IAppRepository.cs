@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace Casino.DAL.Respositories {
     public interface IAppRepository {
+        void CreateItems(List<Item> items);
         Task CreateUser(User user);
         Task<List<int>> GetFavorites(int userId);
         ValueTask<Item?> GetItem(int itemId);
