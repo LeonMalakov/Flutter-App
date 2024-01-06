@@ -34,6 +34,8 @@ class ItemOperationsService {
   Future<List<Item>> getItemPage(int startIndex, int count) async {
     await _initialize();
 
+    //await Future.delayed(const Duration(seconds: 2));
+
     final List<ItemId> pageItemIds = [];
     final List<ItemId> itemIdsToLoad = [];
     final List<Item> items = [];

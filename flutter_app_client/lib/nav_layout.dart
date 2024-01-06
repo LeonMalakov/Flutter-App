@@ -31,11 +31,11 @@ class NavLayout extends StatelessWidget {
               label: 'Главная',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Список говна',
+              icon: Icon(Icons.list),
+              label: 'Каталог',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.favorite),
               label: 'Избранное',
             ),
           ],

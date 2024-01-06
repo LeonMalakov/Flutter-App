@@ -21,7 +21,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'App',
+      title: 'Фильмы со Стетхемом',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: LayoutConstants.mainColor,
@@ -33,7 +33,7 @@ class App extends StatelessWidget {
         RouteConstants.boarding: (context) => const BoardingScreen(),
         RouteConstants.login: (context) => const AppLayout(childWidget: LoginScreen()),
         RouteConstants.signup: (context) => const AppLayout(childWidget: SignupScreen()),
-        RouteConstants.home: (context) => const NavLayout(childWidget: Text("1234")),
+        RouteConstants.home: (context) => const NavLayout(childWidget: Text("Главная")),
         RouteConstants.list: (context) => const NavLayout(childWidget: ListScreen()),
         RouteConstants.favorites: (context) => const NavLayout(childWidget: FavoriteScreen()),
       },

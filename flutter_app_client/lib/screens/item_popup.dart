@@ -71,7 +71,7 @@ class _ItemPopupState extends State<ItemPopup> {
             Text(
               widget.args.item.description,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 20,
               ),
             ),
           ],
