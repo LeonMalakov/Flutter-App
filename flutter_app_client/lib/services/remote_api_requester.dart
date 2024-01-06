@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_app_client/data/item.dart';
 import 'package:flutter_app_client/data/item_id.dart';
 import 'package:flutter_app_client/services/i_remote_api_requester.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_app_client/services/structures/token_pair.dart';
 import 'package:http/http.dart' as http;
 
 import '../constants/api_constants.dart';
+import '../globals.dart';
+import '../utility/string_array_serialization_utility.dart';
 
 class RemoteApiRequester implements IRemoteApiRequester {
 
@@ -78,18 +81,119 @@ class RemoteApiRequester implements IRemoteApiRequester {
   }
 
   @override
-  Future getFavoriteItemIds(List<ItemId> outIds) async {
-    await Future.delayed(const Duration(seconds: 1));
+  Future<bool> getFavoriteItemIds(List<ItemId> outIds) async {
+    final response = await http.get(
+      Uri.parse(ApiConstants.getFavoritesUrl),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${Globals.services.auth.getAuthToken()}'
+      },
+    );
+
+    if (kDebugMode) {
+      print("getFavoriteItemIds: ${response.statusCode}, ${response.body}");
+    }
+
+    if(response.statusCode != 200) {
+      return false;
+    }
+
+    final data = response.body;
+    final ids = StringArraySerializationUtility.deserialize(data);
+    for(ItemId id in ids){
+      outIds.add(id);
+    }
+
+    return true;
   }
 
   @override
-  Future getItemIdPage(int startIndex, int count, List<ItemId> outIds) async {
-    await Future.delayed(const Duration(seconds: 1));
+  Future<bool> getItemIdPage(int startIndex, int count, List<ItemId> outIds) async {
+    final response = await http.get(
+      Uri.parse("${ApiConstants.getItemIdPageUrl}?StartIndex=$startIndex&Count=$count"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${Globals.services.auth.getAuthToken()}'
+      },
+    );
+
+    if (kDebugMode) {
+      print("getItemIdPage: ${response.statusCode}, ${response.body}");
+    }
+
+    if(response.statusCode != 200) {
+      return false;
+    }
+
+    final data = response.body;
+    final ids = StringArraySerializationUtility.deserialize(data);
+    for(ItemId id in ids){
+      outIds.add(id);
+    }
+
+    return true;
   }
 
   @override
-  Future getItems(List<ItemId> ids, List<Item> outItems) async {
-    await Future.delayed(const Duration(seconds: 1));
+  Future<bool> getItems(List<ItemId> ids, List<Item> outItems) async {
+    String idsStr = StringArraySerializationUtility.serialize(ids);
+
+    final response = await http.get(
+      Uri.parse("${ApiConstants.getItemsUrl}?ItemIds=$idsStr"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${Globals.services.auth.getAuthToken()}'
+      },
+    );
+
+    if (kDebugMode) {
+      print("getItems: ${response.statusCode}, ${response.body}");
+    }
+
+    if(response.statusCode != 200) {
+      return false;
+    }
+
+    final data = jsonDecode(response.body);
+
+    for(final itemData in data) {
+      final item = Item(
+        id: ItemId(itemData['Id']),
+        title: itemData['Title'],
+        subtitle: itemData['Subtitle'],
+        description: itemData['Description'],
+        imageUrl: itemData['ImageUrl'],
+      );
+
+      outItems.add(item);
+    }
+
+    return true;
+  }
+
+  @override
+  Future<bool> setFavorite(ItemId favorite, bool isFavorite) async {
+    final response = await http.post(
+      Uri.parse(ApiConstants.setFavoriteUrl),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${Globals.services.auth.getAuthToken()}'
+      },
+      body: jsonEncode({
+        "itemId": favorite.value,
+        "isFavorite": isFavorite
+      })
+    );
+
+    if (kDebugMode) {
+      print("setFavorite: ${response.statusCode}, ${response.body}");
+    }
+
+    if(response.statusCode != 200) {
+      return false;
+    }
+
+    return true;
   }
 
   TokenPair? _tryGetTokenPairFromJson(String json) {

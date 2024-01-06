@@ -10,9 +10,11 @@ abstract interface class IRemoteApiRequester {
 
   Future<TokenPair?> refresh(String refreshToken);
 
-  Future getItemIdPage(int startIndex, int count, List<ItemId> outIds);
+  Future<bool> getItemIdPage(int startIndex, int count, List<ItemId> outIds);
 
-  Future getItems(List<ItemId> ids, List<Item> outItems);
+  Future<bool> getItems(List<ItemId> ids, List<Item> outItems);
 
-  Future getFavoriteItemIds(List<ItemId> outIds);
+  Future<bool> getFavoriteItemIds(List<ItemId> outIds);
+
+  Future<bool> setFavorite(ItemId favorite, bool isFavorite);
 }

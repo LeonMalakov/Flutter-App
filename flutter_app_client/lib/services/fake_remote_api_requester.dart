@@ -6,20 +6,21 @@ import '../data/item_id.dart';
 
 class FakeRemoteApiRequester implements IRemoteApiRequester {
   @override
-  Future getItemIdPage(int startIndex, int count, List<ItemId> outIds) async {
+  Future<bool> getItemIdPage(int startIndex, int count, List<ItemId> outIds) async {
     await Future.delayed(const Duration(seconds: 1));
 
     if(startIndex >= 110){
-      return [];
+      return false;
     }
 
     for(int i = startIndex; i < startIndex + count; i++){
       outIds.add(ItemId(i));
     }
+    return true;
   }
 
   @override
-  Future getItems(List<ItemId> ids, List<Item> outItems) async {
+  Future<bool> getItems(List<ItemId> ids, List<Item> outItems) async {
     await Future.delayed(const Duration(seconds: 2));
 
     for(final id in ids){
@@ -31,15 +32,17 @@ class FakeRemoteApiRequester implements IRemoteApiRequester {
         imageUrl: 'https://thumbs.dfs.ivi.ru/storage6/contents/8/8/84a1f2c0430452ab08f07c86eab477.jpg',
       ));
     }
+    return true;
   }
 
   @override
-  Future getFavoriteItemIds(List<ItemId> outIds) async {
+  Future<bool> getFavoriteItemIds(List<ItemId> outIds) async {
     await Future.delayed(const Duration(seconds: 1));
 
     for(int i = 5; i < 14; i++){
       outIds.add(ItemId(i));
     }
+    return true;
   }
 
   @override
@@ -58,5 +61,10 @@ class FakeRemoteApiRequester implements IRemoteApiRequester {
   Future<TokenPair?> signUp(String userName, String password) async {
     await Future.delayed(const Duration(seconds: 1));
     return TokenPair(access: 'access', refresh: 'refresh');
+  }
+
+  @override
+  Future<bool> setFavorite(ItemId favorite, bool isFavorite) async {
+    return true;
   }
 }

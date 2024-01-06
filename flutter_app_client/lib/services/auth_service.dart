@@ -19,6 +19,10 @@ class AuthService {
     _refreshToken= await Globals.services.storage.loadRefreshToken();
   }
 
+  String getAuthToken() {
+    return _authToken ?? "";
+  }
+
   Future<bool> checkAuth() async {
     await _initialize();
 

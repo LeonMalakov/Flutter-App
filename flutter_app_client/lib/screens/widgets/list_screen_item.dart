@@ -35,7 +35,7 @@ class ListScreenItem extends StatelessWidget {
         maxLines: 1,
         softWrap: false,
       ),
-      trailing: const Icon(Icons.more_vert),
+      trailing: const Icon(Icons.arrow_forward_ios),
       onTap: () {
         onClicked(item.id);
       },
