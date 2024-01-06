@@ -17,7 +17,7 @@ class BoardingScreen extends StatefulWidget {
 
 class _BoardingScreenState extends State<BoardingScreen> {
   void _moveRegister() {
-    Globals.services.screen.moveScreen(context, RouteConstants.login);
+    Globals.services.screen.moveScreen(context, RouteConstants.signup);
   }
 
   void _moveLogin() {

@@ -1,5 +1,6 @@
 import 'package:flutter_app_client/data/item.dart';
 import 'package:flutter_app_client/services/i_remote_api_requester.dart';
+import 'package:flutter_app_client/services/structures/token_pair.dart';
 
 import '../data/item_id.dart';
 
@@ -39,5 +40,23 @@ class FakeRemoteApiRequester implements IRemoteApiRequester {
     for(int i = 5; i < 14; i++){
       outIds.add(ItemId(i));
     }
+  }
+
+  @override
+  Future<TokenPair?> refresh(String refreshToken) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return TokenPair(access: 'access', refresh: 'refresh');
+  }
+
+  @override
+  Future<TokenPair?> logIn(String userName, String password) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return TokenPair(access: 'access', refresh: 'refresh');
+  }
+
+  @override
+  Future<TokenPair?> signUp(String userName, String password) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return TokenPair(access: 'access', refresh: 'refresh');
   }
 }

@@ -4,7 +4,9 @@ import 'package:flutter_app_client/services/fake_remote_api_requester.dart';
 import 'package:flutter_app_client/services/i_remote_api_requester.dart';
 import 'package:flutter_app_client/services/item_collection_service.dart';
 import 'package:flutter_app_client/services/item_operations_service.dart';
+import 'package:flutter_app_client/services/remote_api_requester.dart';
 import 'package:flutter_app_client/services/screen_service.dart';
+import 'package:flutter_app_client/services/storage_service.dart';
 
 import 'factories/item_popup_factory.dart';
 
@@ -18,8 +20,10 @@ class Services {
   final screen = ScreenService();
   final itemCollection = ItemCollectionService();
   final itemOperations = ItemOperationsService();
-  final IRemoteApiRequester remoteApiRequester = FakeRemoteApiRequester();
+  //final IRemoteApiRequester remoteApiRequester = FakeRemoteApiRequester();
+  final IRemoteApiRequester remoteApiRequester = RemoteApiRequester();
   final boarding = BoardingService();
+  final storage = StorageService();
 }
 
 class Factories {

@@ -4,16 +4,16 @@ import 'package:flutter_app_client/screens/widgets/auth_form.dart';
 
 import '../constants/app_constants.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() {
-    return _LoginScreenState();
+  State<SignupScreen> createState() {
+    return _SignupScreenState();
   }
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
   String _login = "";
   String _password = "";
@@ -22,8 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
     Globals.services.screen.moveScreen(context, RouteConstants.home);
   }
 
-  void _moveToSignup() {
-    Globals.services.screen.moveScreen(context, RouteConstants.signup);
+  void _moveToLogin() {
+    Globals.services.screen.moveScreen(context, RouteConstants.login);
   }
 
   void _showError(String content) {
@@ -34,14 +34,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _onAuthClicked() async {
     if (!_formKey.currentState!.validate()) {
-      _showError('Введите данные для входа');
+      _showError('Введите данные для регистрации');
       return;
     }
 
-    bool result = await Globals.services.auth.tryLogIn(_login, _password);
+    bool result = await Globals.services.auth.trySignUp(_login, _password);
 
     if (!result) {
-      _showError('Неверный логин или пароль');
+      _showError('Пользователь с таким именем уже существует');
       return;
     }
 
@@ -57,8 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             AuthForm(
               formKey: _formKey,
-              title: 'Вход',
-              loginButtonText: 'Войти',
+              title: 'Регистрация',
+              loginButtonText: 'Зарегистрироваться',
               onAuthClicked: _onAuthClicked,
               onLoginChanged: (value) {
                 _login = value;
@@ -68,8 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
             TextButton(
-              onPressed: _moveToSignup,
-              child: const Text('Нет аккаунта? Зарегистрируйтесь'),
+              onPressed: _moveToLogin,
+              child: const Text('Уже есть аккаунт? Войти'),
             ),
           ],
         )
