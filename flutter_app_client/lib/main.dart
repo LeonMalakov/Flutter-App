@@ -33,7 +33,7 @@ class App extends StatelessWidget {
         RouteConstants.boarding: (context) => const BoardingScreen(),
         RouteConstants.login: (context) => const AppLayout(childWidget: LoginScreen()),
         RouteConstants.signup: (context) => const AppLayout(childWidget: SignupScreen()),
-        RouteConstants.home: (context) => const NavLayout(childWidget: Text("Главная")),
+        //RouteConstants.home: (context) => const NavLayout(childWidget: Text("Главная")),
         RouteConstants.list: (context) => const NavLayout(childWidget: ListScreen()),
         RouteConstants.favorites: (context) => const NavLayout(childWidget: FavoriteScreen()),
       },

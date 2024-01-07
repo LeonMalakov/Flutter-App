@@ -1,3 +1,8 @@
+flutter_icons:
+  image_path: "assets/icon.png"
+  android: true
+  ios: false
+
 name: flutter_app_client
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
@@ -41,6 +46,7 @@ dependencies:
   event: ^2.1.2
   flutter_onboarding_slider: ^1.0.11
   shared_preferences: ^2.2.2
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:

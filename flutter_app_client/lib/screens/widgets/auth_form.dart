@@ -31,6 +31,7 @@ class AuthForm extends StatelessWidget {
             onChanged: onLoginChanged,
           ),
           TextFormField(
+            obscureText: true,
             decoration: const InputDecoration(
               hintText: 'Введите пароль',
             ),
