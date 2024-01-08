@@ -15,6 +15,7 @@ services:
       - casino-net
     volumes:
       - ./:/usr/src/app
+    restart: unless-stopped
     depends_on:
       - postgres
 
