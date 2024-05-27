@@ -49,7 +49,8 @@ class NavLayout extends StatelessWidget {
               label: 'Elementary'
             ),
           ],
-          selectedItemColor: LayoutConstants.mainColor,
+          selectedItemColor: LayoutConstants.navSelected,
+          unselectedItemColor: LayoutConstants.navUnselected,
           currentIndex: _screenRouteToIndexMap[Globals.services.screen.getActiveScreen()] ?? 0,
           onTap: (index) {
             String? route = _indexToScreenRouteMap[index];

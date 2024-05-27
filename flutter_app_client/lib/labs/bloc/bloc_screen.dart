@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_client/globals.dart';
-import 'package:flutter_app_client/labs/bloc/states/bloc_state.dart';
-import 'package:flutter_app_client/screens/widgets/auth_form.dart';
+import 'package:flutter_app_client/labs/bloc/rgb_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc.dart';
-import 'events/bloc_event.dart';
+import 'rgb_bloc.dart';
+import 'rgb_event.dart';
 
 class BlocScreen extends StatelessWidget {
   const BlocScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final counterBloc = CounterBloc();
+    final counterBloc = RGBBloc();
 
     return BlocProvider(
         create: (context) => counterBloc,
@@ -21,26 +19,50 @@ class BlocScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BlocBuilder<CounterBloc, CounterState>(
+
+                BlocBuilder<RGBBloc, RGBState>(
                   builder: (context, state) {
-                    final value = state is CounterInitial ? state.value : 0;
-                    return Text(
-                      'Счетчик: ${value}',
-                      style: const TextStyle(fontSize: 24),
-                    );
+                    if(state is RGBInitial) {
+                      return const Text('Начальное состояние', style: TextStyle(fontSize: 24));
+                    } else if(state is RGBActive) {
+                      return Container(
+                        width: 100,
+                        height: 100,
+                        color: Color.fromRGBO(state.value.r, state.value.g, state.value.b, 1),
+                      );
+                    }
+                    return const Text('Ошибка', style: TextStyle(fontSize: 24));
                   },
+                ),
+
+                BlocBuilder<RGBBloc, RGBState>(
+                  builder: (context, state) {
+                    if(state is RGBInitial) {
+                      return const Text('Жми кнопки чтобы начать', style: TextStyle(fontSize: 24));
+                    } else if(state is RGBActive) {
+                      return Text('R: ${state.value.r}, G: ${state.value.g}, B: ${state.value.b}', style: const TextStyle(fontSize: 24));
+                    }
+                    return const Text('Ошибка', style: TextStyle(fontSize: 24));
+                  },
+                ),
+
+                ElevatedButton(
+                  onPressed: () {
+                    counterBloc.add(RGBEventAddR());
+                  },
+                  child: const Text('R+'),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    counterBloc.add(BlocEventA());
+                    counterBloc.add(RGBEventAddG());
                   },
-                  child: Text('+'),
+                  child: const Text('G+'),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    counterBloc.add(BlocEventB());
+                    counterBloc.add(RGBEventAddB());
                   },
-                  child: Text('-'),
+                  child: const Text('B+'),
                 ),
               ],
             )
