@@ -7,4 +7,8 @@ class RouteConstants {
   static const String list = '/list';
   static const String home = '/list';
   static const String favorites = '/favorites';
+
+  static const String bloc = '/bloc';
+  static const String redux = '/redux';
+  static const String elementary = '/elementary';
 }

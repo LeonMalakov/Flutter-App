@@ -10,9 +10,11 @@ import 'globals.dart';
 
 class NavLayout extends StatelessWidget {
   static const _screenRouteToIndexMap = {
-    //RouteConstants.home: 0,
     RouteConstants.list: 0,
     RouteConstants.favorites: 1,
+    RouteConstants.bloc: 2,
+    RouteConstants.redux: 3,
+    RouteConstants.elementary: 4
   };
   static final _indexToScreenRouteMap = CollectionUtility.invertMap(_screenRouteToIndexMap);
 
@@ -26,10 +28,6 @@ class NavLayout extends StatelessWidget {
         childWidget: childWidget,
         bottomWidget: BottomNavigationBar(
           items: const [
-            /*BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Главная',
-            ),*/
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
               label: 'Каталог',
@@ -37,6 +35,18 @@ class NavLayout extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               label: 'Избранное',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.square),
+              label: 'Bloc',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.square_rounded),
+              label: 'Redux',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.square_foot),
+              label: 'Elementary'
             ),
           ],
           selectedItemColor: LayoutConstants.mainColor,

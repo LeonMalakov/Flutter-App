@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_client/constants/app_constants.dart';
 import 'package:flutter_app_client/constants/layout_constants.dart';
+import 'package:flutter_app_client/labs/elementary/elementary_screen.dart';
 import 'package:flutter_app_client/nav_layout.dart';
 import 'package:flutter_app_client/screens/boarding_screen.dart';
 import 'package:flutter_app_client/screens/boot_screen.dart';
@@ -10,6 +11,8 @@ import 'package:flutter_app_client/screens/login_screen.dart';
 import 'package:flutter_app_client/screens/signup_screen.dart';
 
 import 'app_layout.dart';
+import 'labs/bloc/bloc_screen.dart';
+import 'labs/redux/redux_screen.dart';
 
 void main() {
   runApp(const App());
@@ -36,6 +39,9 @@ class App extends StatelessWidget {
         //RouteConstants.home: (context) => const NavLayout(childWidget: Text("Главная")),
         RouteConstants.list: (context) => const NavLayout(childWidget: ListScreen()),
         RouteConstants.favorites: (context) => const NavLayout(childWidget: FavoriteScreen()),
+        RouteConstants.bloc: (context) => const NavLayout(childWidget: BlocScreen()),
+        RouteConstants.redux: (context) => const NavLayout(childWidget: ReduxScreen()),
+        RouteConstants.elementary: (context) => const NavLayout(childWidget: ElementaryScreen()),
       },
       initialRoute: RouteConstants.boot
     );

@@ -20,8 +20,8 @@ class Services {
   final screen = ScreenService();
   final itemCollection = ItemCollectionService();
   final itemOperations = ItemOperationsService();
-  //final IRemoteApiRequester remoteApiRequester = FakeRemoteApiRequester();
-  final IRemoteApiRequester remoteApiRequester = RemoteApiRequester();
+  final IRemoteApiRequester remoteApiRequester = FakeRemoteApiRequester();
+  //final IRemoteApiRequester remoteApiRequester = RemoteApiRequester();
   final boarding = BoardingService();
   final storage = StorageService();
 }
